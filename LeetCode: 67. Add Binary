@@ -1,0 +1,30 @@
+"""
+Insstructions: Given two binary strings a and b, return their sum as a binary string.
+"""
+
+# Written in Python by Drake Nisbet
+
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        answer = []
+        carry = 0
+
+        # make sure the binary strings are the same length
+        len_a, len_b = len(a), len(b)
+        max_len = max(len_a, len_b)
+        a = '0' * (max_len - len_a) + a
+        b = '0' * (max_len - len_b) + b
+
+        # add the digits, starting in the back
+        for i in range(max_len - 1, -1, -1):
+            bin_sum = int(a[i]) + int(b[i]) + carry
+            answer.append(str(bin_sum % 2))
+            carry = bin_sum // 2
+
+        # add the ending carry, if it exists
+        if carry:
+            answer.append(str(carry))
+
+        # reverse the results and return the sum
+        answer.reverse()
+        return ''.join(answer)
