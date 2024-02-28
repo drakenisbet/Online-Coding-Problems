@@ -1,0 +1,19 @@
+# Written in Python by Drake Nisbet
+
+class Solution:
+    def buddyStrings(self, s: str, goal: str) -> bool:
+
+        # special cases
+        if len(s) != len(goal): # string lengths are NOT equal, swap not possible
+            return False
+        if s == goal and len(set(s)) < len(s): # strings are the same AND have repeated characters, swap possible
+            return True
+
+        # find the differences and return boolean result
+        err = []
+        for a, b in zip(s, goal):
+            if a != b:
+                err.append((a, b))
+                if len(err) > 2:
+                    return False
+        return len(err) == 2 and err[0][0] == err[1][1] and err[0][1] == err[1][0]
