@@ -1,5 +1,5 @@
 """
-Insstructions: Given two binary strings a and b, return their sum as a binary string.
+Instructions: Given two binary strings a and b, return their sum as a binary string.
 """
 
 # Written in Python by Drake Nisbet
