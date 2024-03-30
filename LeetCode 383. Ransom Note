@@ -1,0 +1,28 @@
+"""
+Given two strings ransomNote and magazine, return true if ransomNote can be 
+constructed by using the letters from magazine and false otherwise.
+"""
+
+def makeDictionary(string):
+        """ This functions takes a string and returns a dictionary 
+        of its characters with the number of each character. """
+        dictionary = {}
+        for l in string:
+            if l not in dictionary:
+                dictionary[l] = 1
+            else:
+                dictionary[l] = dictionary[l] + 1
+        return dictionary
+
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        magazine_letters = makeDictionary(magazine)
+        for l in ransomNote:
+            if l not in magazine_letters:
+                return False
+            else:
+                magazine_letters[l] = magazine_letters[l] - 1
+        for l in magazine_letters:
+            if magazine_letters[l] < 0:
+                return False
+        return True
