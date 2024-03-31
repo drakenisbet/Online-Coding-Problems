@@ -1,0 +1,26 @@
+"""
+Given a string s, find the first non-repeating character in it and return its index. 
+If it does not exist, return -1.
+"""
+
+def makeDictionary(string):
+        """ This functions takes a string and returns a dictionary 
+        of its characters with the number of each character. """
+        dictionary = {}
+        for l in string:
+            if l not in dictionary:
+                dictionary[l] = 1
+            else:
+                dictionary[l] = dictionary[l] + 1
+        return dictionary
+
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        characters = makeDictionary(s)
+        position = 0
+        for l in s:
+            if characters[l] == 1:
+                return position
+            else:
+                position = position + 1
+        return -1
