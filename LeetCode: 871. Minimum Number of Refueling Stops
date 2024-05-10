@@ -1,0 +1,31 @@
+"""
+A car travels from a starting position to a destination 
+which is target miles east of the starting position.
+Return the minimum number of refueling stops the car 
+must make in order to reach its destination. 
+If it cannot reach the destination, return -1.
+"""
+
+class Solution(object):
+    def minRefuelStops(self, target, startFuel, stations):
+        num_stops = len(stations)
+        stops = [0] * (num_stops + 1)
+        stops[0] = startFuel
+
+        # if no stops are necessary, return 0
+        if target <= startFuel:
+            return 0
+
+        # i = station number, x = number of stops you've made
+        for i in range(num_stops): # loop through stations
+            for x in range(i, -1, -1): # loop backwards through previous stops
+                if stops[x] >= stations[i][0]: # if we can reach station i, refuel and update the max distance
+                    stops[x + 1] = max(stops[x + 1], stops[x] + stations[i][1])
+
+        # return the number of stops it takes to reach the target
+        for i in range(num_stops + 1):
+            if stops[i] >= target:
+                return i
+    
+        # if the trip is impossible, return -1
+        return -1 
